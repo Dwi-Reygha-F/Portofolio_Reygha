@@ -36,13 +36,15 @@ const Project = forwardRef((props, ref) => {
           }}
         ></div>
         <div className="relative w-full mt-20">
-          <h2 className="text-3xl font-bold text-center text-white mb-10">My Projects</h2>
+          <h2 className="text-3xl font-bold text-center text-white mb-10" data-aos="fade-up" data-aos-duration="1000">
+            My Projects
+          </h2>
           
           {/* Grid untuk responsif */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
             {/* Map projects */}
             {projects.map((project, index) => (
-              <div key={index} className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm">
+              <div key={index} className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm" data-aos="fade-up" data-aos-duration="1000" data-aos-delay={index * 200}>
                 <a href="#">
                   <img className="rounded-t-lg" src={project.image} alt={project.title} />
                 </a>

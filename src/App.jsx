@@ -12,7 +12,12 @@ import 'aos/dist/aos.css';
 
 function App() {
   useEffect(() => {
-    AOS.init({ duration: 1000 });
+    AOS.init({
+      duration: 1000, // Durasi animasi dalam milidetik
+      easing: 'ease-in-out', // Jenis easing animasi
+      once: true, // Animasi hanya terjadi sekali ketika elemen muncul
+      offset: 100, // Memulai animasi lebih awal sebelum mencapai posisi scroll
+    });
   }, []);
 
 
@@ -49,38 +54,37 @@ function App() {
         <Navbar scrollToSection={scrollToSection} />
 
         <div ref={homeRef} className="min-h-screen bg-gradient-to-b from-blue-200 to-blue-100 dark:from-[#0A0F2C] dark:to-[#141933] flex items-center justify-center px-8 mt-24">
-          <div className="max-w-7xl w-full flex flex-col md:flex-row items-center justify-center space-x-10">
-            {/* Kiri: Kata-kata */}
-            <div className="text-center md:text-left space-y-4">
-              <h1 className="text-4xl md:text-5xl font-bold text-[#1C3D5A] dark:text-white">
-                Hi, I’m <span className="text-blue-500">  <Typewriter
-                  words={['Dwi Reygha Febryan!', 'Reygha!', 'Egha!']}
-                  loop={0}
-                  cursor
-                  cursorStyle='_'
-                  typeSpeed={70}
-                  deleteSpeed={50}
-                  delaySpeed={1000}
-                /></span>
-              </h1>
-              <p className="text-lg text-gray-700 dark:text-gray-300 max-w-md mx-auto md:mx-0">
-                I’m a passionate Web Developer who loves creating beautiful and functional websites. Let's build something amazing together!
-              </p>
-            
-            </div>
+  <div className="max-w-7xl w-full flex flex-col md:flex-row items-center justify-center space-x-10">
+    {/* Kiri: Kata-kata */}
+    <div className="text-center md:text-left space-y-4" data-aos="fade-up" data-aos-duration="1000">
+      <h1 className="text-4xl md:text-5xl font-bold text-[#1C3D5A] dark:text-white">
+        Hi, I’m <span className="text-blue-500">
+          <Typewriter
+            words={['Dwi Reygha Febryan!', 'Reygha!', 'Egha!']}
+            loop={0}
+            cursor
+            cursorStyle='_'
+            typeSpeed={70}
+            deleteSpeed={50}
+            delaySpeed={1000}
+          />
+        </span>
+      </h1>
+      <p className="text-lg text-gray-700 dark:text-gray-300 max-w-md mx-auto md:mx-0">
+        I’m a passionate Web Developer who loves creating beautiful and functional websites. Let's build something amazing together!
+      </p>
+    </div>
 
-            <div className="mt-10 md:mt-0 relative flex items-center justify-center" data-aos='fade-left'>
-
-              <div className='absolute w-64 h-64 bg-sky-500 rounded-full z-10 blur-xl'></div>
-              <img
-                src={profil}
-                alt="Foto Profil"
-                className="w-64 h-64 rounded-full object-cover border-4 border-black shadow-lg z-20"
-              />
-
-            </div>
-          </div>
-        </div>
+    <div className="mt-10 md:mt-0 relative flex items-center justify-center" data-aos="fade-left" data-aos-duration="1000">
+      <div className='absolute w-64 h-64 bg-sky-500 rounded-full z-10 blur-xl'></div>
+      <img
+        src={profil}
+        alt="Foto Profil"
+        className="w-64 h-64 rounded-full object-cover border-4 border-black shadow-lg z-20"
+      />
+    </div>
+  </div>
+</div>
 
         <main>
           <About ref={aboutRef} />

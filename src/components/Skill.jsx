@@ -20,7 +20,9 @@ const Skill = forwardRef((props, ref) => {
 
       {/* Konten */}
       <div className="relative max-w-6xl mx-auto w-full">
-        <h2 className="text-3xl font-bold text-center text-white mb-10">My Skills</h2>
+        <h2 className="text-3xl font-bold text-center text-white mb-10" data-aos="fade-up" data-aos-duration="1000">
+          My Skills
+        </h2>
 
         {/* Grid Skill */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -51,6 +53,8 @@ const SkillCard = ({ Icon, color, label }) => (
   <div
     className="w-full h-32 bg-transparent border border-blue-900 rounded-lg flex flex-col items-center justify-center space-y-2 hover:bg-blue-600/20 transition duration-300"
     data-aos="flip-right"
+    data-aos-duration="1000"
+    data-aos-delay="200"
   >
     <Icon className={`${color} w-14 h-14`} />
     <span className="text-white font-semibold text-lg">{label}</span>
