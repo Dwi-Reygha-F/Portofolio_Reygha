@@ -10,7 +10,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
       "predeploy": "npm run build",
-  "deploy": "gh-pages -d dist"
+  "deploy": "npm run build && git add . && git commit -m \"Build for deploy\" && git subtree push --prefix dist origin gh-pages"
   },
   "dependencies": {
     "aos": "^2.3.4",
