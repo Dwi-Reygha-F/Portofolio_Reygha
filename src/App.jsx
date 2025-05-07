@@ -33,7 +33,7 @@ function App() {
         <div className="text-center md:text-left space-y-4">
           <h1 className="text-4xl md:text-5xl font-bold text-[#1C3D5A] dark:text-white">
             Hi, I’m <span className="text-blue-500">  <Typewriter
-          words={['Dwi Reygha F!', 'Reygha!', 'Egha!']}
+          words={['Dwi Reygha Febryan!', 'Reygha!', 'Egha!']}
           loop={0}
           cursor
           cursorStyle='_'
