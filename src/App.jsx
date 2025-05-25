@@ -70,9 +70,10 @@ function App() {
           />
         </span>
       </h1>
-      <p className="text-lg text-gray-700 dark:text-gray-300 max-w-md mx-auto md:mx-0">
-        I’m a passionate Web Developer who loves creating beautiful and functional websites. Let's build something amazing together!
-      </p>
+     <p className="text-lg text-gray-700 dark:text-gray-300 max-w-md mx-auto md:mx-0">
+  Saya adalah seorang Web Developer yang antusias dalam menciptakan website yang menarik dan fungsional. Mari wujudkan proyek luar biasa bersama!
+</p>
+
     </div>
 
     <div className="mt-10 md:mt-0 relative flex items-center justify-center" data-aos="fade-left" data-aos-duration="1000">
