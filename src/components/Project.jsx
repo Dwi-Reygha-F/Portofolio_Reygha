@@ -1,72 +1,105 @@
-import { forwardRef } from 'react';
-import RsMadya from '../assets/img/RsMadya.png';
-import CineTix from '../assets/img/CineTixDSH.png';
-import AparHyd from '../assets/img/AparHydDSH.png';
-import wavepattren from '../assets/img/wavepattren.png';
+import { forwardRef, useEffect, useRef } from "react";
+import trianglepattren from '../assets/img/trianglepattren.png';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import emailjs from 'emailjs-com';
+import Swal from 'sweetalert2'; // Tambahkan ini
 
-const Project = forwardRef((props, ref) => {
-  // Data proyek
-  const projects = [
-    {
-      image: RsMadya,
-      title: 'Rumah Sakit Sentra Madya',
-      deskripsi: 'Aplikasi Rumah Sakit Yang Bisa Mengecek Jadwal Dokter, Data Kamar PerLantai Dll.',
-    },
-    {
-      image: CineTix,
-      title: 'CineTix',
-      deskripsi: 'Aplikasi Pemesanan Tiket Bioskop Online',
-    },
-    {
-      image: AparHyd,
-      title: 'Cek Apar Hydrant',
-      deskripsi: 'Aplikasi Checklist Apar Dan Hydrant',
-    },
-  ];
+const Contact = forwardRef((props, ref) => {
+  const form = useRef();
+
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      easing: 'ease-in-out',
+      once: true,
+      offset: 100,
+    });
+  }, []);
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs.sendForm(
+      'service_ltr3mxn',     // Ganti dengan service ID dari EmailJS
+      'template_xo1d2q2',    // Ganti dengan template ID dari EmailJS
+      form.current,
+      'CAYPfSRszVRC6wnbS'    // Ganti dengan public key dari EmailJS
+    ).then((result) => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Berhasil!',
+        text: 'Pesan berhasil dikirim.',
+        confirmButtonColor: '#3085d6',
+      });
+    }, (error) => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Terjadi kesalahan saat mengirim pesan. Coba lagi nanti.',
+        confirmButtonColor: '#d33',
+      });
+    });
+
+    e.target.reset();
+  };
 
   return (
-    <div>
-      <div ref={ref} className="relative bg-gradient-to-b from-blue-400 to-blue-100 dark:from-[#0A0F2C] dark:to-[#141933] w-full min-h-screen flex items-center justify-center p-4">
-        <div
-          className="absolute inset-0 opacity-10"
-          style={{
-            backgroundImage: `url(${wavepattren})`,
-            backgroundRepeat: 'repeat',
-            backgroundSize: '150px',
-          }}
-        ></div>
-        <div className="relative w-full mt-20">
-          <h2 className="text-3xl font-bold text-center text-white mb-10" data-aos="fade-up" data-aos-duration="1000">
-            My Projects
-          </h2>
-          
-          {/* Grid untuk responsif */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-            {/* Map projects */}
-            {projects.map((project, index) => (
-              <div key={index} className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm" data-aos="fade-up" data-aos-duration="1000" data-aos-delay={index * 200}>
-                <a href="#">
-                  <img className="rounded-t-lg" src={project.image} alt={project.title} />
-                </a>
-                <div className="p-5">
-                  <a href="#">
-                    <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{project.title}</h5>
-                  </a>
-                  <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">{project.deskripsi}</p>
-                  <a href="#" className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    Read more
-                    <svg className="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                      <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
-                    </svg>
-                  </a>
-                </div>
-              </div>
-            ))}
+    <div ref={ref} className="relative bg-gradient-to-b from-blue-200 to-blue-100 dark:from-[#0A0F2C] dark:to-[#141933] py-10 w-full min-h-screen flex items-center justify-center p-4">
+      <div
+        className="absolute inset-0 opacity-5"
+        style={{
+          backgroundImage: `url(${trianglepattren})`,
+          backgroundRepeat: 'repeat',
+          backgroundSize: '150px',
+        }}
+      ></div>
+      <div className="relative flex flex-col items-center justify-center mt-24" data-aos="fade-up">
+        <h2 className="text-3xl font-bold text-[#1C3D5A] dark:text-white mb-6">Contact Me</h2>
+
+        <form ref={form} onSubmit={sendEmail} className="w-full max-w-lg bg-white dark:bg-[#1D2538] p-8 rounded-xl shadow-lg space-y-4" data-aos="fade-up" data-aos-delay="200">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="col-span-1" data-aos="fade-up" data-aos-delay="400">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Name</label>
+              <input
+                type="text"
+                name="name"
+                placeholder="Your Name"
+                className="w-full p-3 mt-2 border border-gray-300 rounded-md dark:bg-[#2A3747] dark:border-gray-600 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            <div className="col-span-1" data-aos="fade-up" data-aos-delay="600">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
+              <input
+                type="email"
+                name="email"
+                placeholder="Your Email"
+                className="w-full p-3 mt-2 border border-gray-300 rounded-md dark:bg-[#2A3747] dark:border-gray-600 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
           </div>
-        </div>
+
+          <div data-aos="fade-up" data-aos-delay="800">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Message</label>
+            <textarea
+              name="message"
+              rows="4"
+              placeholder="Your Message"
+              className="w-full p-3 mt-2 border border-gray-300 rounded-md dark:bg-[#2A3747] dark:border-gray-600 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+            ></textarea>
+          </div>
+
+          <button
+            type="submit"
+            className="w-full py-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-blue-700 dark:hover:bg-blue-600"
+            data-aos="fade-up" data-aos-delay="1000"  
+          >
+            Send Message
+          </button>
+        </form>
       </div>
     </div>
   );
 });
 
-export default Project;
+export default Contact;

@@ -3,11 +3,11 @@ import trianglepattren from '../assets/img/trianglepattren.png';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import emailjs from 'emailjs-com';
+import Swal from 'sweetalert2'; // Tambahkan ini
 
 const Contact = forwardRef((props, ref) => {
   const form = useRef();
 
-  // Inisialisasi AOS
   useEffect(() => {
     AOS.init({
       duration: 1000,
@@ -21,17 +21,27 @@ const Contact = forwardRef((props, ref) => {
     e.preventDefault();
 
     emailjs.sendForm(
-      'service_ltr3mxn',      // Ganti dengan service ID dari EmailJS
-      'template_xo1d2q2',     // Ganti dengan template ID dari EmailJS
+      'service_ltr3mxn',     // Ganti dengan service ID dari EmailJS
+      'template_xo1d2q2',    // Ganti dengan template ID dari EmailJS
       form.current,
-      'CAYPfSRszVRC6wnbS'       // Ganti dengan public key dari EmailJS
+      'CAYPfSRszVRC6wnbS'    // Ganti dengan public key dari EmailJS
     ).then((result) => {
-      alert('Pesan berhasil dikirim!');
+      Swal.fire({
+        icon: 'success',
+        title: 'Berhasil!',
+        text: 'Pesan berhasil dikirim.',
+        confirmButtonColor: '#3085d6',
+      });
     }, (error) => {
-      alert('Terjadi kesalahan, coba lagi.');
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Terjadi kesalahan saat mengirim pesan. Coba lagi nanti.',
+        confirmButtonColor: '#d33',
+      });
     });
 
-    e.target.reset(); // Reset form setelah dikirim
+    e.target.reset();
   };
 
   return (
@@ -49,7 +59,6 @@ const Contact = forwardRef((props, ref) => {
 
         <form ref={form} onSubmit={sendEmail} className="w-full max-w-lg bg-white dark:bg-[#1D2538] p-8 rounded-xl shadow-lg space-y-4" data-aos="fade-up" data-aos-delay="200">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {/* Name Field */}
             <div className="col-span-1" data-aos="fade-up" data-aos-delay="400">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Name</label>
               <input
@@ -59,8 +68,6 @@ const Contact = forwardRef((props, ref) => {
                 className="w-full p-3 mt-2 border border-gray-300 rounded-md dark:bg-[#2A3747] dark:border-gray-600 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
-
-            {/* Email Field */}
             <div className="col-span-1" data-aos="fade-up" data-aos-delay="600">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
               <input
@@ -72,7 +79,6 @@ const Contact = forwardRef((props, ref) => {
             </div>
           </div>
 
-          {/* Message Field */}
           <div data-aos="fade-up" data-aos-delay="800">
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Message</label>
             <textarea
